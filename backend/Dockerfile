@@ -16,5 +16,5 @@ COPY . .
 # Compilar o código TypeScript
 RUN npx tsc
 
-# Comando para rodar o script TypeScript com ts-node
-CMD ["npx", "ts-node", "src/index.ts"]
+# Comando para rodar o script TypeScript com ts-node - CMD ["npx", "ts-node", "src/index.ts"]
+CMD ["npm", "run", "dev"]
