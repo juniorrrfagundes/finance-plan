@@ -9,7 +9,7 @@ export class UserRepositoryPg extends UserRepository {
 		super();
 	}
 
-	public async create(user: User): Promise<User> {
+	public async createUser(user: User): Promise<User> {
 		const query = ` INSERT INTO users (name, password) VALUES ($1, $2) RETURNING *; `;
 		const result = await this.pg.query(query, [user.name, user.password]);
 		return result[0];

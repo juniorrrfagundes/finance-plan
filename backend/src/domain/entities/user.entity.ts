@@ -1,12 +1,12 @@
 export class User {
 	constructor(
-		public readonly id: number,
+		public readonly id: number | null,
 		public name: string,
 		public password: string,
-		public createdAt: Date,
+		public createdAt: Date | null,
 	) {}
 
-	static create(name: string, password: string): User {
-		return new User(Date.now(), name, password, new Date());
+	public static createUser(name: string, password: string): User {
+		return new User(null, name, password, null);
 	}
 }

@@ -1,4 +1,3 @@
-// src/modules/user/user.module.ts
 import { Module } from '@nestjs/common';
 import { CreateUserUseCase } from '../../application/use-cases/create-user.use-case';
 import { UserRepositoryPg } from '../../infrastructure/database/user.repository.pg';
