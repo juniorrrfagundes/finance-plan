@@ -7,7 +7,7 @@ export class PgConnection {
 
 	constructor() {
 		this.pool = new Pool({
-			host: 'localhost',
+			host: 'postgres',
 			port: 5432,
 			user: 'postgres',
 			password: 'admin',
