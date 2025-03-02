@@ -4,7 +4,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "ts-node src/api/main.ts",
+		"dev": "ts-node src/main.ts",
 		"start": "ts-node src/index.ts"
 	},
 	"keywords": [],
@@ -13,6 +13,7 @@
 	"description": "",
 	"devDependencies": {
 		"@types/node": "^22.13.7",
+		"@types/pg": "^8.11.11",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.8.2"
 	},
@@ -20,6 +21,7 @@
 		"@nestjs/common": "^11.0.11",
 		"@nestjs/core": "^11.0.11",
 		"@nestjs/platform-express": "^11.0.11",
+		"pg": "^8.13.3",
 		"rxjs": "^7.8.2"
 	}
 }
