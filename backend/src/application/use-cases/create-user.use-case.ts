@@ -6,8 +6,8 @@ import { User } from '../../domain/entities/user.entity';
 export class CreateUserUseCase {
 	constructor(private readonly userRepository: UserRepository) {}
 
-	public async execute(name: string, password: string): Promise<User> {
-		const user = User.create(name, password);
-		return await this.userRepository.create(user);
+	public async createUser(name: string, password: string): Promise<User> {
+		const user = User.createUser(name, password);
+		return await this.userRepository.createUser(user);
 	}
 }
