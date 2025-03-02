@@ -1,16 +1,18 @@
-import { Controller, Post, Body } from '@nestjs/common';
-import { CreateCategoryUseCase } from '../../application/use-cases/category.use-case';
-import { CreateCategoryDto } from '../../application/dto/category.dto';
+import { Controller, Post, Body, Delete } from '@nestjs/common';
+import { CreateCategoryUseCase, DeleteCategoryUseCase } from '../../application/use-cases/category.use-case';
+import { CreateCategoryDto, DeleteCategoryDto } from '../../application/dto/category.dto';
 
 @Controller('categories')
 export class CategoryController {
-	constructor(private readonly createCategory: CreateCategoryUseCase) {}
+	constructor(private readonly createCategory: CreateCategoryUseCase, private readonly deleteCategory: DeleteCategoryUseCase) {}
 
 	@Post()
 	public async create(@Body() createCategoryDto: CreateCategoryDto) {
-		return this.createCategory.CreateCategory(
-			createCategoryDto.name,
-			createCategoryDto.id_user,
-		);
+		return this.createCategory.createCategory(createCategoryDto.name, createCategoryDto.id_user);
+	}
+
+	@Delete()
+	public async delete(@Body() deleteCategoryDto: DeleteCategoryDto) {
+		return this.deleteCategory.deleteCategory(deleteCategoryDto.id, deleteCategoryDto.id_user);
 	}
 }
