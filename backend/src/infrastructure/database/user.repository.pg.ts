@@ -1,17 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { PgConnection } from './pg-connection';
-import { UserRepository } from '../../domain/repositories/user.repository';
-import { User } from '../../domain/entities/user.entity';
+import { UserRepository } from '../../core/domain/repositories/user.repository';
+import { UserDto } from '../../core/application/dto/user.dto';
+import { CreateUserDto } from '../../core/application/dto/create-user.dto';
+import { User } from '../../core/domain/entities/user.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
-export class UserRepositoryPg extends UserRepository {
-	constructor(private readonly pg: PgConnection) {
-		super();
-	}
+export class UserRepositoryPg implements UserRepository {
+	constructor(
+		@InjectRepository(User)
+		private readonly userRepository: Repository<User>,
+	) {}
 
-	public async createUser(user: User): Promise<User> {
-		const query = ` INSERT INTO users (name, password) VALUES ($1, $2) RETURNING *; `;
-		const result = await this.pg.query(query, [user.name, user.password]);
-		return result[0];
+	public async createUser(createUserDto: CreateUserDto): Promise<UserDto> {
+		const userEntity = User.fromDto(createUserDto);
+		const savedUser = await this.userRepository.save(userEntity);
+		const userDto = User.entityToDto(savedUser);
+		return userDto;
 	}
 }

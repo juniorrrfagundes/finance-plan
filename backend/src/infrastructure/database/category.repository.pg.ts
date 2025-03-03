@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PgConnection } from './pg-connection';
-import { CategoryRepository } from '../../domain/repositories/category.repository';
-import { Category } from '../../domain/entities/category.entity';
+import { CategoryRepository } from '../../core/domain/repositories/category.repository';
+import { Category } from '../../core/domain/entities/category.entity';
 
 @Injectable()
 export class CategoryRepositoryPg extends CategoryRepository {

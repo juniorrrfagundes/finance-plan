@@ -1,6 +1,6 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { CreateUserUseCase } from '../../application/use-cases/create-user.use-case';
-import { CreateUserDto } from '../../application/dto/create-user.dto';
+import { CreateUserUseCase } from '../core/application/use-cases/create-user.use-case';
+import { CreateUserDto } from '../core/application/dto/create-user.dto';
 
 @Controller('users')
 export class UserController {
@@ -8,6 +8,6 @@ export class UserController {
 
 	@Post()
 	public async create(@Body() createUserDto: CreateUserDto) {
-		return this.createUserUseCase.createUser(createUserDto.name, createUserDto.password);
+		return this.createUserUseCase.createUser(createUserDto);
 	}
 }
