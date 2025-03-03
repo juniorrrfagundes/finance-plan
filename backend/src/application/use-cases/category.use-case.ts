@@ -6,8 +6,18 @@ import { Category } from '../../domain/entities/category.entity';
 export class CreateCategoryUseCase {
 	constructor(private readonly categoryRepository: CategoryRepository) {}
 
-	public async CreateCategory(name: string, id_user: number) {
+	public async createCategory(name: string, id_user: number) {
 		const category = Category.createCategory(name, id_user);
 		return await this.categoryRepository.createCategory(category);
+	}
+}
+
+@Injectable()
+export class DeleteCategoryUseCase {
+	constructor(private readonly categoryRepository: CategoryRepository) {}
+
+	public async deleteCategory(id: number, id_user: number) {
+		const category = Category.deleteCategory(id, id_user);
+		return await this.categoryRepository.deleteCategory(category);
 	}
 }

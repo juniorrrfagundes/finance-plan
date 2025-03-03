@@ -14,4 +14,10 @@ export class CategoryRepositoryPg extends CategoryRepository {
 		const result = await this.pg.query(query, [category.name, category.id_user]);
 		return result[0];
 	}
+
+	public async deleteCategory(category: Category): Promise<Category> {
+		const query = ` UPDATE categories SET delete_at = NOW() WHERE id = $1 AND id_user = $2 RETURNING *; `;
+		const result = await this.pg.query(query, [category.id, category.id_user]);
+		return result[0];
+	}
 }
