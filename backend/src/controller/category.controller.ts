@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Delete } from '@nestjs/common';
-import { CreateCategoryUseCase, DeleteCategoryUseCase } from '../../application/use-cases/category.use-case';
-import { CreateCategoryDto, DeleteCategoryDto } from '../../application/dto/category.dto';
+import { CreateCategoryUseCase, DeleteCategoryUseCase } from '../core/application/use-cases/category.use-case';
+import { CreateCategoryDto, DeleteCategoryDto } from '../core/application/dto/category.dto';
 
 @Controller('categories')
 export class CategoryController {
