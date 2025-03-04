@@ -1,4 +1,5 @@
 import { CreateUserDto } from '../../application/dto/create-user.dto';
+import { LoginDto } from '../../application/dto/login.dto';
 import { UserDto } from '../../application/dto/user.dto';
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
@@ -28,6 +29,10 @@ export class User {
 	}
 
 	public static entityToDto(user: User): UserDto {
-		return new UserDto(user.id, user.name, user.created_at);
+		return new UserDto(user.id, user.name, user.password, user.created_at);
+	}
+
+	public static fromLoginDto(loginDto: LoginDto): User {
+		return new User(loginDto.name, loginDto.password);
 	}
 }

@@ -4,7 +4,10 @@ import { UserModule } from './modules/user/user.module';
 import { CategoryModule } from './modules/category/category.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './core/domain/entities/user.entity';
-import { UserRepositoryPg } from './infrastructure/database/user.repository.pg';
+import { UserRepositoryOrm } from './infrastructure/database/user.repository.orm';
+import { ConfigModule } from '@nestjs/config';
+import { LoginModule } from './modules/login/login.module';
+import { LoginRepositoryOrm } from './infrastructure/database/login.repository.orm';
 
 @Module({
 	imports: [
@@ -20,7 +23,9 @@ import { UserRepositoryPg } from './infrastructure/database/user.repository.pg';
 			entities: [User],
 			synchronize: false,
 		}),
-		TypeOrmModule.forFeature([UserRepositoryPg]),
+		TypeOrmModule.forFeature([UserRepositoryOrm, LoginRepositoryOrm]),
+		LoginModule,
+		ConfigModule.forRoot({ isGlobal: true }),
 	],
 	controllers: [],
 	providers: [],
