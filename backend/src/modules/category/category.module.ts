@@ -6,6 +6,7 @@ import { CategoryRepository } from '../../core/domain/repositories/category.repo
 import { CategoryRepositoryOrm } from '../../infrastructure/database/category.repository.orm';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Category } from '../../core/domain/entities/category.entity';
+import { DeleteCategoryUseCase } from '../../core/application/use-cases/delete-category.use-case';
 
 @Module({
 	imports: [TypeOrmModule.forFeature([Category])],
@@ -15,8 +16,9 @@ import { Category } from '../../core/domain/entities/category.entity';
 			useClass: CategoryRepositoryOrm,
 		},
 		CreateCategoryUseCase,
+		DeleteCategoryUseCase,
 	],
-	exports: [CreateCategoryUseCase],
+	exports: [CreateCategoryUseCase, DeleteCategoryUseCase],
 	controllers: [CategoryController],
 })
 export class CategoryModule {}

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, DeleteDateColumn } from 'typeorm';
 import { CreateCategoryDto } from '../../application/dto/create-category.dto';
 import { CategoryDto } from '../../application/dto/category.dto';
 
@@ -13,7 +13,7 @@ export class Category {
 	@Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
 	public created_at!: Date;
 
-	@Column({ type: 'timestamptz' })
+	@DeleteDateColumn({ type: 'timestamptz' })
 	public delete_at!: Date;
 
 	@Column()
@@ -31,6 +31,6 @@ export class Category {
 	}
 
 	public static entityToDto(category: Category): CategoryDto {
-		return new CategoryDto(category.id, category.name, category.created_at, category.delete_at);
+		return new CategoryDto(category.id, category.name, category.created_at, category.delete_at, category.id_user);
 	}
 }
