@@ -11,11 +11,11 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- create category table
-CREATE TABLE IF NOT EXISTS categorys (
+CREATE TABLE IF NOT EXISTS categories (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-    delete_at TIMESTAMP NULL DEFAULT NULL, -- soft delete
+    delete_at TIMESTAMPTZ NULL DEFAULT NULL, -- soft delete
     id_user INT NOT NULL,
     FOREIGN KEY (id_user) REFERENCES users(id) 
 );
@@ -32,5 +32,5 @@ CREATE TABLE IF NOT EXISTS transactions (
     date_transaction DATE NOT NULL, 
     delete_at TIMESTAMP NULL DEFAULT NULL, -- soft delete
     FOREIGN KEY (id_user) REFERENCES users(id),
-    FOREIGN KEY (id_category) REFERENCES categorys(id) ON DELETE SET NULL
+    FOREIGN KEY (id_category) REFERENCES categories(id) ON DELETE SET NULL
 );
