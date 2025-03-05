@@ -1,7 +1,3 @@
-export class CreateCategoryDto {
-	constructor(public name: string, public id_user: number) {}
-}
-
-export class DeleteCategoryDto {
-	constructor(public id: number, public id_user: number) {}
+export class CategoryDto {
+	constructor(private readonly id: number | null, public name: string, public create_at: Date | null, public delete_at: Date | null) {}
 }
