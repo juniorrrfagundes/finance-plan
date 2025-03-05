@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CreateUserUseCase } from '../../core/application/use-cases/createUser.use-case';
+import { CreateUserUseCase } from '../../core/application/use-cases/create-user.use-case';
 import { UserRepositoryOrm } from '../../infrastructure/database/user.repository.orm';
 import { PgConnection } from '../../infrastructure/database/pg-connection';
 import { UserController } from '../../controller/user.controller';
