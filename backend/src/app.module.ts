@@ -8,6 +8,7 @@ import { UserRepositoryOrm } from './infrastructure/database/user.repository.orm
 import { ConfigModule } from '@nestjs/config';
 import { LoginModule } from './modules/login/login.module';
 import { LoginRepositoryOrm } from './infrastructure/database/login.repository.orm';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
 	imports: [
@@ -26,6 +27,7 @@ import { LoginRepositoryOrm } from './infrastructure/database/login.repository.o
 		TypeOrmModule.forFeature([UserRepositoryOrm, LoginRepositoryOrm]),
 		LoginModule,
 		ConfigModule.forRoot({ isGlobal: true }),
+		AuthModule,
 	],
 	controllers: [],
 	providers: [],
