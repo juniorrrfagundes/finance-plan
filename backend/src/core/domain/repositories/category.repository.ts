@@ -1,6 +1,6 @@
 import { CreateCategoryDto } from '../../application/dto/create-category.dto';
 import { CategoryDto } from '../../application/dto/category.dto';
-import { DeleteResult } from 'typeorm';
+import { DeleteResult, UpdateResult } from 'typeorm';
 
 export abstract class CategoryRepository {
 	public abstract createCategory(category: CreateCategoryDto): Promise<CategoryDto>;
@@ -8,4 +8,6 @@ export abstract class CategoryRepository {
 	public abstract deleteCategoryById(id: number): Promise<DeleteResult>;
 
 	public abstract findOneById(id: number): Promise<CategoryDto | null>;
+
+	public abstract updateCategoryById(id: number, name: string): Promise<UpdateResult>;
 }

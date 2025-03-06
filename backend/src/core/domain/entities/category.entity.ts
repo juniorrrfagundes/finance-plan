@@ -20,10 +20,8 @@ export class Category {
 	public id_user!: number;
 
 	constructor(name?: string, id_user?: number) {
-		if (name && id_user) {
-			this.name = name;
-			this.id_user = id_user;
-		}
+		this.name = name ?? '';
+		this.id_user = id_user ?? 0;
 	}
 
 	public static createDtoToEntity(createCategoryDto: CreateCategoryDto): Category {
