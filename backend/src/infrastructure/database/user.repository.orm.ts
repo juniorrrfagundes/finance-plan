@@ -20,9 +20,8 @@ export class UserRepositoryOrm implements UserRepository {
 		return userDto;
 	}
 
-	public async findByName(createUserDto: CreateUserDto): Promise<UserDto | null> {
-		const userEntity = User.dtoToEntity(createUserDto);
-		const result = await this.userRepository.findOneBy({ name: userEntity.name });
+	public async findByName(name: string): Promise<UserDto | null> {
+		const result = await this.userRepository.findOneBy({ name: name });
 		if (!result) return null;
 		const userDto = User.entityToDto(result);
 		return userDto;
