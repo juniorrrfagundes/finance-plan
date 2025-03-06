@@ -1,6 +1,5 @@
 import { Inject, Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
 import { CategoryRepository } from '../../domain/repositories/category.repository';
-import { DeleteResult } from 'typeorm';
 
 @Injectable()
 export class DeleteCategoryUseCase {
