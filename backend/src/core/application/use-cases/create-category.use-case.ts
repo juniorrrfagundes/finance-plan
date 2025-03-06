@@ -12,13 +12,3 @@ export class CreateCategoryUseCase {
 		return await this.categoryRepository.createCategory(createCategoryDto);
 	}
 }
-
-// @Injectable()
-// export class DeleteCategoryUseCase {
-// 	constructor(private readonly categoryRepository: CategoryRepository) {}
-
-// 	public async deleteCategory(id: number, id_user: number) {
-// 		const category = Category.deleteCategory(id, id_user);
-// 		return await this.categoryRepository.deleteCategory(category);
-// 	}
-// }

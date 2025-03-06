@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CategoryRepository } from '../../core/domain/repositories/category.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from '../../core/domain/entities/category.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CreateCategoryDto } from '../../core/application/dto/create-category.dto';
 import { CategoryDto } from '../../core/application/dto/category.dto';
 
@@ -13,7 +13,16 @@ export class CategoryRepositoryOrm implements CategoryRepository {
 	public async createCategory(createCategoryDto: CreateCategoryDto): Promise<CategoryDto> {
 		const categoryEntity = Category.createDtoToEntity(createCategoryDto);
 		const savedCategory = await this.categoryRepository.save(categoryEntity);
-		const categoryDto = Category.entityToDto(savedCategory);
-		return categoryDto;
+		return Category.entityToDto(savedCategory);
+	}
+
+	public async deleteCategoryById(id: number): Promise<DeleteResult> {
+		return await this.categoryRepository.softDelete({ id: id });
+	}
+
+	public async findOneById(id: number): Promise<CategoryDto | null> {
+		const isExist = await this.categoryRepository.findOneBy({ id: id });
+		if (!isExist) return null;
+		return Category.entityToDto(isExist);
 	}
 }

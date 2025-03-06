@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { LoginRepository } from '../../core/domain/repositories/login.repository';
-import { LoginRepositoryOrm } from '../../infrastructure/database/login.repository.orm';
 import { LoginUseCase } from '../../core/application/use-cases/login.use-case';
 import { LoginController } from '../../controller/login.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { LoginEntity } from '../../core/domain/entities/login.entity';
+import { User } from '../../core/domain/entities/user.entity';
+import { UserRepository } from '../../core/domain/repositories/user.repository';
+import { UserRepositoryOrm } from '../../infrastructure/database/user.repository.orm';
 
 @Module({
 	imports: [
-		TypeOrmModule.forFeature([LoginEntity]),
+		TypeOrmModule.forFeature([User]),
 		JwtModule.registerAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService],
@@ -22,8 +22,8 @@ import { LoginEntity } from '../../core/domain/entities/login.entity';
 	],
 	providers: [
 		{
-			provide: LoginRepository,
-			useClass: LoginRepositoryOrm,
+			provide: UserRepository,
+			useClass: UserRepositoryOrm,
 		},
 		LoginUseCase,
 	],

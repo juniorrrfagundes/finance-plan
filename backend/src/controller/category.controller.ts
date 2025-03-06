@@ -1,12 +1,13 @@
-import { Controller, Post, Body, Delete, UseGuards, Request } from '@nestjs/common';
+import { Controller, Post, Body, Delete, UseGuards, Request, Param } from '@nestjs/common';
 import { CreateCategoryUseCase } from '../core/application/use-cases/create-category.use-case';
-import { CreateCategoryDto, DeleteCategoryDto } from '../core/application/dto/create-category.dto';
+import { CreateCategoryDto } from '../core/application/dto/create-category.dto';
 import { JwtAuthGuard } from '../core/application/auth/jwt.auth.guard';
 import { IRequest } from '../core/application/interface/request.interface';
+import { DeleteCategoryUseCase } from '../core/application/use-cases/delete-category.use-case';
 
 @Controller('categories')
 export class CategoryController {
-	constructor(private readonly createCategory: CreateCategoryUseCase) {}
+	constructor(private readonly createCategory: CreateCategoryUseCase, private readonly deleteCategory: DeleteCategoryUseCase) {}
 
 	@UseGuards(JwtAuthGuard)
 	@Post()
@@ -15,8 +16,11 @@ export class CategoryController {
 		return this.createCategory.createCategory(createCategoryDto, userId);
 	}
 
-	// @Delete()
-	// public async delete(@Body() deleteCategoryDto: DeleteCategoryDto) {
-	// 	return this.deleteCategory.deleteCategory(deleteCategoryDto.id, deleteCategoryDto.id_user);
-	// }
+	@UseGuards(JwtAuthGuard)
+	@Delete(':id')
+	public async delete(@Param('id') id: string, @Request() req: IRequest) {
+		const userId = req.user.id_user;
+		const parseId = parseInt(id, 10);
+		return this.deleteCategory.deleteCategory(parseId, userId);
+	}
 }

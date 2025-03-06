@@ -9,10 +9,9 @@ export class CreateUserUseCase {
 	constructor(@Inject(UserRepository) private readonly userRepository: UserRepository) {}
 
 	public async createUser(createUserDto: CreateUserDto): Promise<UserDto> {
-		if (!createUserDto.name || !createUserDto.password)
-			throw new BadRequestException('Usuário ou Senha inválidos');
-		const existUser = await this.userRepository.findByName(createUserDto);
-		if (existUser) throw new BadRequestException('Nome de usuário já existente');
+		if (!createUserDto.name || !createUserDto.password) throw new BadRequestException('Usuário ou Senha inválidos.');
+		const existUser = await this.userRepository.findByName(createUserDto.name);
+		if (existUser) throw new BadRequestException('Nome de usuário já existente.');
 		createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
 		return this.userRepository.createUser(createUserDto);
 	}
