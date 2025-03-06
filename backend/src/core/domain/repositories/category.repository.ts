@@ -5,7 +5,7 @@ import { DeleteResult } from 'typeorm';
 export abstract class CategoryRepository {
 	public abstract createCategory(category: CreateCategoryDto): Promise<CategoryDto>;
 
-	public abstract deleteCategory(categoryDto: CategoryDto): Promise<DeleteResult>;
+	public abstract deleteCategoryById(id: number): Promise<DeleteResult>;
 
-	public abstract findOneBy(categoryDto: CategoryDto): Promise<CategoryDto | null>;
+	public abstract findOneById(id: number): Promise<CategoryDto | null>;
 }

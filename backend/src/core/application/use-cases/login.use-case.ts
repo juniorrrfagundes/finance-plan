@@ -10,9 +10,9 @@ export class LoginUseCase {
 
 	public async login(loginDto: LoginDto): Promise<{ access_token: string }> {
 		const userDto = await this.userRepository.findByName(loginDto.name);
-		if (!userDto) throw new NotFoundException('Usuário inválido'); // throw 404
+		if (!userDto) throw new NotFoundException('Usuário inválido.'); // throw 404
 		const match = await bcrypt.compare(loginDto.password, userDto.password);
-		if (!match) throw new UnauthorizedException('Credenciais inválidas'); // throw 401
+		if (!match) throw new UnauthorizedException('Credenciais inválidas.'); // throw 401
 		const payload = { id_user: userDto.id };
 		return { access_token: this.jwtService.sign(payload) };
 	}

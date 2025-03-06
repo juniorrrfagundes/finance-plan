@@ -16,14 +16,12 @@ export class UserRepositoryOrm implements UserRepository {
 	public async createUser(createUserDto: CreateUserDto): Promise<UserDto> {
 		const userEntity = User.dtoToEntity(createUserDto);
 		const savedUser = await this.userRepository.save(userEntity);
-		const userDto = User.entityToDto(savedUser);
-		return userDto;
+		return User.entityToDto(savedUser);
 	}
 
 	public async findByName(name: string): Promise<UserDto | null> {
 		const result = await this.userRepository.findOneBy({ name: name });
 		if (!result) return null;
-		const userDto = User.entityToDto(result);
-		return userDto;
+		return User.entityToDto(result);
 	}
 }

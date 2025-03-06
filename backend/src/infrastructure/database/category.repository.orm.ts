@@ -13,19 +13,16 @@ export class CategoryRepositoryOrm implements CategoryRepository {
 	public async createCategory(createCategoryDto: CreateCategoryDto): Promise<CategoryDto> {
 		const categoryEntity = Category.createDtoToEntity(createCategoryDto);
 		const savedCategory = await this.categoryRepository.save(categoryEntity);
-		const categoryDto = Category.entityToDto(savedCategory);
-		return categoryDto;
+		return Category.entityToDto(savedCategory);
 	}
 
-	public async deleteCategory(deleteCategoryDto: CategoryDto): Promise<DeleteResult> {
-		const result = await this.categoryRepository.softDelete({ id: deleteCategoryDto.id, id_user: deleteCategoryDto.id_user });
-		return result;
+	public async deleteCategoryById(id: number): Promise<DeleteResult> {
+		return await this.categoryRepository.softDelete({ id: id });
 	}
 
-	public async findOneBy(findCategoryDto: CategoryDto): Promise<CategoryDto | null> {
-		const isExist = await this.categoryRepository.findOneBy({ id: findCategoryDto.id, id_user: findCategoryDto.id_user });
+	public async findOneById(id: number): Promise<CategoryDto | null> {
+		const isExist = await this.categoryRepository.findOneBy({ id: id });
 		if (!isExist) return null;
-		const categoryDto = Category.entityToDto(isExist);
-		return categoryDto;
+		return Category.entityToDto(isExist);
 	}
 }
