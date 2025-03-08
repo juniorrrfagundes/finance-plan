@@ -9,6 +9,8 @@ import { ConfigModule } from '@nestjs/config';
 import { LoginModule } from './modules/login/login.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { Category } from './core/domain/entities/category.entity';
+import { TransactionModule } from './modules/transation/transaction.module';
+import { Transaction } from './core/domain/entities/transaction.entity';
 
 @Module({
 	imports: [
@@ -21,13 +23,14 @@ import { Category } from './core/domain/entities/category.entity';
 			username: 'postgres',
 			password: 'admin',
 			database: 'finance',
-			entities: [User, Category],
+			entities: [User, Category, Transaction],
 			synchronize: false,
 		}),
 		TypeOrmModule.forFeature([UserRepositoryOrm]),
 		LoginModule,
 		ConfigModule.forRoot({ isGlobal: true }),
 		AuthModule,
+		TransactionModule,
 	],
 	controllers: [],
 	providers: [],

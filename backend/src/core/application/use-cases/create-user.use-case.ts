@@ -13,6 +13,6 @@ export class CreateUserUseCase {
 		const existUser = await this.userRepository.findByName(createUserDto.name);
 		if (existUser) throw new BadRequestException('Nome de usuário já existente.');
 		createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
-		return this.userRepository.createUser(createUserDto);
+		return await this.userRepository.createUser(createUserDto);
 	}
 }
