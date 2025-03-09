@@ -10,4 +10,6 @@ export abstract class CategoryRepository {
 	public abstract findOneById(id: number): Promise<CategoryDto | null>;
 
 	public abstract updateCategoryById(id: number, name: string): Promise<UpdateResult>;
+
+	public abstract findByUserId(id: number): Promise<CategoryDto[] | null>;
 }
