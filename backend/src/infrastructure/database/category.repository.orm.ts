@@ -17,7 +17,7 @@ export class CategoryRepositoryOrm implements CategoryRepository {
 	}
 
 	public async deleteCategoryById(id: number): Promise<DeleteResult> {
-		return await this.categoryRepository.softDelete({ id: id });
+		return this.categoryRepository.softDelete({ id: id });
 	}
 
 	public async findOneById(id: number): Promise<CategoryDto | null> {
@@ -27,6 +27,6 @@ export class CategoryRepositoryOrm implements CategoryRepository {
 	}
 
 	public async updateCategoryById(id: number, name: string): Promise<UpdateResult> {
-		return await this.categoryRepository.update(id, { name: name });
+		return this.categoryRepository.update(id, { name: name });
 	}
 }

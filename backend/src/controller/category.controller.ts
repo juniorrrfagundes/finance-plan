@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Delete, UseGuards, Request, Param, Patch } from '@nestjs/common';
+import { Controller, Post, Body, Delete, UseGuards, Request, Param, Patch, ParseIntPipe } from '@nestjs/common';
 import { CreateCategoryUseCase } from '../core/application/use-cases/create-category.use-case';
 import { CreateCategoryDto } from '../core/application/dto/create-category.dto';
 import { JwtAuthGuard } from '../core/application/auth/jwt.auth.guard';
@@ -23,16 +23,14 @@ export class CategoryController {
 	}
 
 	@Delete(':id')
-	public async delete(@Param('id') id: string, @Request() req: IRequest) {
+	public async delete(@Param('id', ParseIntPipe) id: number, @Request() req: IRequest) {
 		const userId = req.user.id_user;
-		const parseId = parseInt(id, 10);
-		return this.deleteCategory.deleteCategory(parseId, userId);
+		return this.deleteCategory.deleteCategory(id, userId);
 	}
 
 	@Patch(':id')
-	public async update(@Param('id') id: string, @Request() req: IRequest, @Body() updateCategoryDto: UpdateCategoryDto) {
+	public async update(@Param('id', ParseIntPipe) id: number, @Request() req: IRequest, @Body() updateCategoryDto: UpdateCategoryDto) {
 		const userId = req.user.id_user;
-		const parseId = parseInt(id, 10);
-		return this.updateCategory.updateCategory(parseId, userId, updateCategoryDto);
+		return this.updateCategory.updateCategory(id, userId, updateCategoryDto);
 	}
 }

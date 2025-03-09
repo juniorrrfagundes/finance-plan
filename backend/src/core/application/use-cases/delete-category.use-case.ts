@@ -9,6 +9,6 @@ export class DeleteCategoryUseCase {
 		const existCategory = await this.deleteCategoryRepository.findOneById(id);
 		if (!existCategory) throw new NotFoundException('Categoria não encontrada.');
 		if (existCategory.id_user != id_user) throw new ForbiddenException('Acesso negado: você não tem permissão para esta categoria.');
-		this.deleteCategoryRepository.deleteCategoryById(existCategory.id);
+		await this.deleteCategoryRepository.deleteCategoryById(existCategory.id);
 	}
 }
