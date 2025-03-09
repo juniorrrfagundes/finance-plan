@@ -15,7 +15,7 @@ export class CategoryController {
 		private readonly createCategory: CreateCategoryUseCase,
 		private readonly deleteCategory: DeleteCategoryUseCase,
 		private readonly updateCategory: UpdateCategoryUseCase,
-		private readonly searchCategor: SearchCategoryUseCase,
+		private readonly searchCategory: SearchCategoryUseCase,
 	) {}
 
 	@Post()
@@ -39,12 +39,12 @@ export class CategoryController {
 	@Get()
 	public async searchAll(@Request() req: IRequest) {
 		const userId = req.user.id_user;
-		return this.searchCategor.searchCategory(userId);
+		return this.searchCategory.searchCategory(userId);
 	}
 
 	@Get(':id')
 	public async searchById(@Param('id', ParseIntPipe) id: number, @Request() req: IRequest) {
 		const userId = req.user.id_user;
-		return this.searchCategor.searchCategoryById(id, userId);
+		return this.searchCategory.searchCategoryById(id, userId);
 	}
 }
