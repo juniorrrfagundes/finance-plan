@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, DeleteDateColumn } from 'typeorm';
 import { TransactionDto } from '../../application/dto/transaction.dto';
 import { CreateTransactionDto } from '../../application/dto/create-transaction.dto';
 
@@ -28,7 +28,7 @@ export class Transaction {
 	@Column({ type: 'timestamptz' })
 	public date_transaction!: Date;
 
-	@Column({ type: 'timestamptz' })
+	@DeleteDateColumn({ type: 'timestamptz' })
 	public delete_at!: Date;
 
 	constructor(id_user: number, id_category: number, description: string, value: number, type: string, date_transaction: Date) {

@@ -21,12 +21,18 @@ export class CategoryRepositoryOrm implements CategoryRepository {
 	}
 
 	public async findOneById(id: number): Promise<CategoryDto | null> {
-		const isExist = await this.categoryRepository.findOneBy({ id: id });
-		if (!isExist) return null;
-		return Category.entityToDto(isExist);
+		const categories = await this.categoryRepository.findOneBy({ id: id });
+		if (!categories) return null;
+		return Category.entityToDto(categories);
 	}
 
 	public async updateCategoryById(id: number, name: string): Promise<UpdateResult> {
 		return this.categoryRepository.update(id, { name: name });
+	}
+
+	public async findByUserId(id: number): Promise<CategoryDto[] | null> {
+		const categories = await this.categoryRepository.find({ where: { id_user: id } });
+		if (!categories.length) return null;
+		return categories.map(Category.entityToDto);
 	}
 }
