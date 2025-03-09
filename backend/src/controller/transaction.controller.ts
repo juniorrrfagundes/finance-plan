@@ -3,12 +3,11 @@ import { JwtAuthGuard } from '../core/application/auth/jwt.auth.guard';
 import { IRequest } from '../core/application/interface/request.interface';
 import { CreateTransactionDto } from '../core/application/dto/create-transaction.dto';
 import { CreateTransactionUseCase } from '../core/application/use-cases/create-transaction.use-case';
-import { TransactionRepository } from '../core/domain/repositories/transaction.repository';
 
 @UseGuards(JwtAuthGuard)
 @Controller('transactions')
 export class TransactionController {
-	constructor(@Inject(TransactionRepository) private readonly createTransaction: CreateTransactionUseCase) {}
+	constructor(private readonly createTransaction: CreateTransactionUseCase) {}
 
 	@Post()
 	public async create(@Body() createTransactionDto: CreateTransactionDto, @Request() req: IRequest) {

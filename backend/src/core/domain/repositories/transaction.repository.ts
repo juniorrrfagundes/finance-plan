@@ -2,5 +2,5 @@ import { CreateTransactionDto } from '../../application/dto/create-transaction.d
 import { TransactionDto } from '../../application/dto/transaction.dto';
 
 export abstract class TransactionRepository {
-	public abstract createTransaction(createTransactionDto: CreateTransactionDto, id_user: number): Promise<TransactionDto>;
+	public abstract createTransaction(createTransactionDto: CreateTransactionDto): Promise<TransactionDto>;
 }

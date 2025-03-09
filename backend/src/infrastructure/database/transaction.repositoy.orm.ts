@@ -10,9 +10,9 @@ import { TransactionDto } from '../../core/application/dto/transaction.dto';
 export class TransactionRepositoryOrm implements TransactionRepository {
 	constructor(@InjectRepository(Transaction) private readonly transactionRepository: Repository<Transaction>) {}
 
-	public async createTransaction(createTransactionDto: CreateTransactionDto, id_user: number): Promise<TransactionDto> {
+	public async createTransaction(createTransactionDto: CreateTransactionDto): Promise<TransactionDto> {
 		const transactionEntity = new Transaction(
-			id_user,
+			createTransactionDto.id_user,
 			createTransactionDto.id_category,
 			createTransactionDto.description,
 			createTransactionDto.value,

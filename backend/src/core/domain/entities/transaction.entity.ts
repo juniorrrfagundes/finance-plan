@@ -1,5 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { TransactionDto } from '../../application/dto/transaction.dto';
+import { CreateTransactionDto } from '../../application/dto/create-transaction.dto';
 
 @Entity('transactions')
 export class Transaction {
@@ -37,6 +38,10 @@ export class Transaction {
 		this.value = value;
 		this.type = type;
 		this.date_transaction = date_transaction;
+	}
+
+	public static createDtoToEntity(t: CreateTransactionDto): Transaction {
+		return new Transaction(t.id_user, t.id_category, t.description, t.value, t.type, t.date_transaction);
 	}
 
 	public static entityToDto(transaction: Transaction): TransactionDto {
