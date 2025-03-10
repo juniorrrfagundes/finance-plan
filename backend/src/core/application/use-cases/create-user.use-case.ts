@@ -2,7 +2,7 @@ import { Inject, Injectable, BadRequestException } from '@nestjs/common';
 import { UserRepository } from '../../domain/repositories/user.repository';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UserDto } from '../dto/user.dto';
-import * as bcrypt from 'bcrypt';
+import * as bcryptjs from 'bcryptjs';
 
 @Injectable()
 export class CreateUserUseCase {
@@ -12,7 +12,7 @@ export class CreateUserUseCase {
 		if (!createUserDto.name || !createUserDto.password) throw new BadRequestException('Usuário ou Senha inválidos.');
 		const existUser = await this.userRepository.findByName(createUserDto.name);
 		if (existUser) throw new BadRequestException('Nome de usuário já existente.');
-		createUserDto.password = await bcrypt.hash(createUserDto.password, 10);
+		createUserDto.password = await bcryptjs.hash(createUserDto.password, 10);
 		return await this.userRepository.createUser(createUserDto);
 	}
 }
