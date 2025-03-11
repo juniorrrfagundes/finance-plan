@@ -1,0 +1,69 @@
+/* src/components/Header.module.css */
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 20px;
+	background-color: rgb(53, 81, 92);
+	color: white;
+	width: 150vh;
+	border-radius: 20px;
+}
+
+.logoContainer {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.logo svg {
+	width: 24px;
+	height: 24px;
+	fill: white;
+}
+
+.logo {
+	font-size: 26px;
+	font-weight: bold;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	color: white;
+}
+
+.nav {
+	display: flex;
+	gap: 10px;
+}
+
+.button {
+	background: white;
+	color: #007bff;
+	border: none;
+	padding: 8px 15px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: bold;
+	transition: 0.3s;
+}
+
+.button:hover {
+	background: #0056b3;
+	color: white;
+}
+
+.buttonSignup {
+	background: white;
+	color: #28a745;
+	border: none;
+	padding: 8px 15px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: bold;
+	transition: 0.3s;
+}
+
+.buttonSignup:hover {
+	background: #218838;
+	color: white;
+}
