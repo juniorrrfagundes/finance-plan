@@ -33,37 +33,3 @@
 	display: flex;
 	gap: 10px;
 }
-
-.button {
-	background: white;
-	color: #007bff;
-	border: none;
-	padding: 8px 15px;
-	border-radius: 5px;
-	cursor: pointer;
-	font-size: 16px;
-	font-weight: bold;
-	transition: 0.3s;
-}
-
-.button:hover {
-	background: #0056b3;
-	color: white;
-}
-
-.buttonSignup {
-	background: white;
-	color: #28a745;
-	border: none;
-	padding: 8px 15px;
-	border-radius: 5px;
-	cursor: pointer;
-	font-size: 16px;
-	font-weight: bold;
-	transition: 0.3s;
-}
-
-.buttonSignup:hover {
-	background: #218838;
-	color: white;
-}

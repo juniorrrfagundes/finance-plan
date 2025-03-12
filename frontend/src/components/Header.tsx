@@ -1,24 +1,43 @@
 // src/components/Header.tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Header.module.css';
 import { DollarIcon } from '../assets/DollarIcom';
-import { useNavigate } from 'react-router-dom';
+import { LogoutButton } from './Buttons/LogoutButton';
+import { LoginButton } from './Buttons/LoginButton';
+import { SingupButton } from './Buttons/SingupButton';
 
 export const Header: React.FC = () => {
-	const navigate = useNavigate();
+	const [isLogged, setIsLogged] = useState<Boolean>(!!localStorage.getItem('access_token'));
+
+	useEffect(() => {
+		const handleStorageChange = (event: StorageEvent) => {
+			if (event.key === 'access_token') {
+				setIsLogged(!!event.newValue);
+			}
+		};
+
+		window.addEventListener('storage', handleStorageChange);
+
+		return () => {
+			window.removeEventListener('storage', handleStorageChange);
+		};
+	}, []);
+
 	return (
 		<header className={styles.header}>
 			<div className={styles.logoContainer}>
 				<DollarIcon />
-				<h1 className={styles.logo}>Controle de Finanças</h1>
+				<h1 className={styles.logo}>Finance Control</h1>
 			</div>
 			<nav className={styles.nav}>
-				<button className={styles.button} onClick={() => navigate('/home')}>
-					Login
-				</button>
-				<button className={styles.buttonSignup} onClick={() => navigate('/register')}>
-					Signup
-				</button>
+				{isLogged ? (
+					<LogoutButton />
+				) : (
+					<>
+						<LoginButton />
+						<SingupButton />
+					</>
+				)}
 			</nav>
 		</header>
 	);
