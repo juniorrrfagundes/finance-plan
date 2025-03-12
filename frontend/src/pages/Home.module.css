@@ -3,9 +3,6 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	height: 100vh;
-}
-
-h1 {
-	color: #007bff;
+	height: 90vh;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }

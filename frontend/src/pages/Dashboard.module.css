@@ -1,0 +1,38 @@
+/* src/pages/Dashboard.module.css */
+.dashboardContainer {
+	display: flex;
+	flex-direction: column;
+	height: 90vh; /* Ocupa 100% da altura da tela */
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.mainContent {
+	display: flex;
+	flex-grow: 1;
+	width: 150vh;
+	padding: 15px 20px;
+}
+
+.content {
+	flex-grow: 1;
+	background-color: rgb(53, 81, 92);
+	margin-top: 10px;
+	height: calc(90vh - 80px); /* Para que o conteúdo ocupe o restante da tela após o Header */
+	overflow-y: auto; /* Permite que o conteúdo role */
+	border-radius: 20px;
+	margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+	.dashboardContainer {
+		flex-direction: column;
+	}
+
+	.mainContent {
+		flex-direction: column;
+	}
+
+	.content {
+		height: auto;
+	}
+}

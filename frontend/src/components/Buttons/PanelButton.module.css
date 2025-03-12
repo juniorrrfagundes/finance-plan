@@ -1,5 +1,5 @@
 .button {
-	background: #28a7468e;
+	background: rgba(2, 25, 66, 0.517);
 	color: #ffffff;
 	border: none;
 	padding: 8px 15px;
@@ -8,10 +8,13 @@
 	font-size: 16px;
 	font-weight: bold;
 	transition: 0.3s;
+	display: flex;
+	margin: 5px;
+	justify-content: center;
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .button:hover {
-	background: #175926;
+	background: rgba(2, 25, 66, 0.99);
 	color: white;
 }

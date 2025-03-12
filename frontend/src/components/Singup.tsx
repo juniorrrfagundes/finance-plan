@@ -20,6 +20,9 @@ export const Singup: React.FC = () => {
 			});
 			if (response.ok) {
 				navigate('/home');
+			} else {
+				const data = await response.json();
+				setError(data.message || 'Error');
 			}
 		} catch (err) {
 			setError('Error connecting to server');
