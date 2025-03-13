@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, DeleteDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, DeleteDateColumn, OneToMany } from 'typeorm';
 import { CreateCategoryDto } from '../../application/dto/create-category.dto';
 import { CategoryDto } from '../../application/dto/category.dto';
+import { Transaction } from './transaction.entity';
 
 @Entity('categories')
 export class Category {
@@ -18,6 +19,9 @@ export class Category {
 
 	@Column()
 	public id_user!: number;
+
+	@OneToMany(() => Transaction, (transaction) => transaction.category)
+	public transactions!: Transaction[];
 
 	constructor(name?: string, id_user?: number) {
 		this.name = name ?? '';

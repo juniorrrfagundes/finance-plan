@@ -13,4 +13,6 @@ export abstract class TransactionRepository {
 	public abstract updateTransactionById(id: number, upateTransactionDto: TransactionDto): Promise<UpdateResult>;
 
 	public abstract findByUserId(id: number): Promise<TransactionDto[] | null>;
+
+	public abstract getBalanceInvested(id: number): Promise<{ balance: number; invested: number }>;
 }

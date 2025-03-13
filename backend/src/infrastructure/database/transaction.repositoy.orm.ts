@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { TransactionRepository } from '../../core/domain/repositories/transaction.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Transaction } from '../../core/domain/entities/transaction.entity';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult, IsNull } from 'typeorm';
 import { CreateTransactionDto } from '../../core/application/dto/create-transaction.dto';
 import { TransactionDto } from '../../core/application/dto/transaction.dto';
 import { UpdateTransactionDto } from '../../core/application/dto/update-transactin.dto';
@@ -43,5 +43,35 @@ export class TransactionRepositoryOrm implements TransactionRepository {
 		const transaction = await this.transactionRepository.find({ where: { id_user: id } });
 		if (!transaction) return null;
 		return transaction.map(Transaction.entityToDto);
+	}
+
+	public async getBalanceInvested(id: number): Promise<{ balance: number; invested: number }> {
+		const transactions = await this.transactionRepository.find({
+			where: { id_user: id, delete_at: IsNull() },
+			relations: ['category'],
+		});
+
+		let balance = 0;
+		let invested = 0;
+
+		transactions.forEach((transaction) => {
+			const isInvestment = transaction.category?.name === 'investiment';
+
+			if (transaction.type === 'income') {
+				if (isInvestment) {
+					invested += Number(transaction.value);
+				} else {
+					balance += Number(transaction.value);
+				}
+			} else if (transaction.type === 'expense') {
+				if (isInvestment) {
+					invested -= Number(transaction.value);
+				} else {
+					balance -= Number(transaction.value);
+				}
+			}
+		});
+
+		return { balance: balance, invested: invested };
 	}
 }
