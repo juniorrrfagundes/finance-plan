@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn, DeleteDateColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { TransactionDto } from '../../application/dto/transaction.dto';
 import { CreateTransactionDto } from '../../application/dto/create-transaction.dto';
+import { Category } from './category.entity';
 
 @Entity('transactions')
 export class Transaction {
@@ -30,6 +31,10 @@ export class Transaction {
 
 	@DeleteDateColumn({ type: 'timestamptz' })
 	public delete_at!: Date;
+
+	@ManyToOne(() => Category, (category) => category.transactions, { nullable: true })
+	@JoinColumn({ name: 'id_category' })
+	public category!: Category;
 
 	constructor(id_user: number, id_category: number, description: string, value: number, type: string, date_transaction: Date) {
 		this.id_user = id_user;

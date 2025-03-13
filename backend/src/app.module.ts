@@ -18,7 +18,7 @@ import { Transaction } from './core/domain/entities/transaction.entity';
 		CategoryModule,
 		TypeOrmModule.forRoot({
 			type: 'postgres',
-			host: 'postgres', // for docker use postgres, for local use localhost
+			host: 'localhost', // for docker use postgres, for local use localhost
 			port: 5432,
 			username: 'postgres',
 			password: 'admin',

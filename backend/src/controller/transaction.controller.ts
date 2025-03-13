@@ -42,6 +42,12 @@ export class TransactionController {
 		return this.searchTransactionUseCase.searchTransaction(userId);
 	}
 
+	@Get('/balance')
+	public async getBalanceInvested(@Request() req: IRequest) {
+		const userId = req.user.id_user;
+		return this.searchTransactionUseCase.getBalanceInvested(userId);
+	}
+
 	@Get(':id')
 	public async searchById(@Param('id', ParseIntPipe) id: number, @Request() req: IRequest) {
 		const userId = req.user.id_user;

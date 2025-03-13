@@ -18,4 +18,8 @@ export class SearchTransactionUseCase {
 		if (transaction.id_user != id_user) throw new ForbiddenException('Acesso negado: você não tem permissão para esta categoria.');
 		return transaction;
 	}
+
+	public async getBalanceInvested(id_user: number): Promise<{ balance: number; invested: number }> {
+		return await this.transactionRepository.getBalanceInvested(id_user);
+	}
 }
