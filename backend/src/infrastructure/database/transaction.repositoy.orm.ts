@@ -46,32 +46,32 @@ export class TransactionRepositoryOrm implements TransactionRepository {
 	}
 
 	public async getBalanceInvested(id: number): Promise<{ balance: number; invested: number }> {
-		const transactions = await this.transactionRepository.find({
-			where: { id_user: id, delete_at: IsNull() },
-			relations: ['category'],
-		});
+		const result = await this.transactionRepository.query(
+			`
+			SELECT  
+				COALESCE(SUM(
+					CASE  
+						WHEN t.type = 'income' AND (c.name IS NULL OR c.name <> 'investiment') THEN t.value  
+						WHEN t.type = 'expense' AND (c.name IS NULL OR c.name <> 'investiment') THEN -t.value  
+						ELSE 0  
+					END
+				), 0) AS balance,  
 
-		let balance = 0;
-		let invested = 0;
+				COALESCE(SUM(
+					CASE  
+						WHEN t.type = 'income' AND c.name = 'investiment' THEN t.value  
+						WHEN t.type = 'expense' AND c.name = 'investiment' THEN -t.value  
+						ELSE 0  
+					END
+				), 0) AS invested  
 
-		transactions.forEach((transaction) => {
-			const isInvestment = transaction.category?.name === 'investiment';
+			FROM transactions t  
+			LEFT JOIN categories c ON t.id_category = c.id  
+			WHERE t.id_user = $1 AND t.delete_at IS NULL;
+		`,
+			[id],
+		);
 
-			if (transaction.type === 'income') {
-				if (isInvestment) {
-					invested += Number(transaction.value);
-				} else {
-					balance += Number(transaction.value);
-				}
-			} else if (transaction.type === 'expense') {
-				if (isInvestment) {
-					invested -= Number(transaction.value);
-				} else {
-					balance -= Number(transaction.value);
-				}
-			}
-		});
-
-		return { balance: balance, invested: invested };
+		return result[0];
 	}
 }
