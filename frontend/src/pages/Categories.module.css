@@ -1,4 +1,4 @@
-.dashboardContainer {
+.categoriesContainer {
 	display: flex;
 	flex-direction: column;
 	height: 90vh;
@@ -20,6 +20,10 @@
 	overflow-y: auto;
 	border-radius: 20px;
 	margin-left: 20px;
+}
+.createButton {
+	display: flex;
+	margin: 50px;
 }
 
 @media (max-width: 768px) {

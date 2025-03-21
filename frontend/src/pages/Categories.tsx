@@ -1,19 +1,22 @@
 import React from 'react';
 import { Header } from '../components/Header';
 import { LeftPanel } from '../components/LeftPanel';
-import styles from './Dashboard.module.css';
+import styles from './Categories.module.css';
+import { CreateButton } from '../components/Buttons/CreateButton';
 
-export const Dashboard: React.FC = () => {
+export const Categories: React.FC = () => {
 	const token = localStorage.getItem('access_token');
 
 	return (
-		<div className={styles.dashboardContainer}>
+		<div className={styles.categoriesContainer}>
 			<Header />
 			<div className={styles.mainContent}>
 				<LeftPanel />
 				<div className={styles.content}>
-					<h1>Dashboard</h1>
-					<p>Este é o conteúdo da página principal.</p>
+					<h1>Categories</h1>
+					<div className={styles.createButton}>
+						<CreateButton />
+					</div>
 				</div>
 			</div>
 		</div>
