@@ -12,4 +12,6 @@ export abstract class CategoryRepository {
 	public abstract updateCategoryById(id: number, name: string): Promise<UpdateResult>;
 
 	public abstract findByUserId(id: number): Promise<CategoryDto[] | null>;
+
+	public abstract findByCategoryName(name: string): Promise<CategoryDto | null>;
 }

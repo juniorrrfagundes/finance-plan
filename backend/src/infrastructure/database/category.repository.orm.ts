@@ -35,4 +35,10 @@ export class CategoryRepositoryOrm implements CategoryRepository {
 		if (!categories.length) return null;
 		return categories.map(Category.entityToDto);
 	}
+
+	public async findByCategoryName(name: string): Promise<CategoryDto | null> {
+		const categories = await this.categoryRepository.findOneBy({ name: name });
+		if (!categories) return null;
+		return Category.entityToDto(categories);
+	}
 }
