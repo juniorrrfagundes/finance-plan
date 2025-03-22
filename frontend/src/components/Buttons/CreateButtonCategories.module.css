@@ -9,6 +9,7 @@
 	font-weight: bold;
 	transition: 0.3s;
 	min-width: 100px;
+	max-height: 40px;
 }
 
 .container {
@@ -105,4 +106,18 @@
 	100% {
 		transform: rotate(360deg);
 	}
+}
+
+.error {
+	color: rgb(237, 107, 107);
+}
+
+.createContainer {
+	align-items: center;
+	display: flex;
+	gap: 10px;
+}
+
+.success {
+	color: rgba(23, 240, 23, 0.689);
 }

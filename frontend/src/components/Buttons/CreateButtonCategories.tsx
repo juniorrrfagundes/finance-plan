@@ -7,6 +7,7 @@ export const CreateButtonCategories: React.FC = () => {
 	const [showModal, setShowModal] = useState(false);
 	const [name, setName] = useState('');
 	const [error, setError] = useState('');
+	const [success, setSuccess] = useState('');
 
 	const access_token = localStorage.getItem('access_token');
 
@@ -15,7 +16,8 @@ export const CreateButtonCategories: React.FC = () => {
 	};
 
 	const saveName = async () => {
-		console.log(access_token);
+		setError('');
+		setSuccess('');
 		setStatus('loading');
 		try {
 			const response = await fetch('http://localhost:3000/categories', {
@@ -27,16 +29,16 @@ export const CreateButtonCategories: React.FC = () => {
 			console.log(data);
 			if (response.ok) {
 				setStatus('success');
+				setSuccess(data.message || 'Success');
 			} else {
 				setStatus('error');
+				setError(data.message || 'Unexpected Error');
 			}
 		} catch (error) {
 			setStatus('error');
-			console.log(`Unexpected Error: ${error}`);
+			setError('Unexpected Error');
 		}
 
-		setTimeout(() => setStatus('idle'), 3000);
-		console.log('Nome salvo:', name);
 		setShowModal(false);
 		setName('');
 	};
@@ -48,7 +50,7 @@ export const CreateButtonCategories: React.FC = () => {
 
 	return (
 		<>
-			<div>
+			<div className={styles.createContainer}>
 				<button className={styles.button} onClick={create}>
 					Create
 				</button>
@@ -59,6 +61,8 @@ export const CreateButtonCategories: React.FC = () => {
 				)}
 				{status === 'success' && <FaCheckCircle size={18} color="#28a745" />}
 				{status === 'error' && <FaTimesCircle size={18} color="#dc3545" />}
+				{error && <p className={styles.error}>{error}</p>}
+				{success && <p className={styles.success}>{success}</p>}
 			</div>
 
 			{showModal && (
