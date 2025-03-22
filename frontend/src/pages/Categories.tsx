@@ -2,7 +2,7 @@ import React from 'react';
 import { Header } from '../components/Header';
 import { LeftPanel } from '../components/LeftPanel';
 import styles from './Categories.module.css';
-import { CreateButton } from '../components/Buttons/CreateButton';
+import { CreateButtonCategories } from '../components/Buttons/CreateButtonCategories';
 
 export const Categories: React.FC = () => {
 	const token = localStorage.getItem('access_token');
@@ -15,8 +15,10 @@ export const Categories: React.FC = () => {
 				<div className={styles.content}>
 					<h1>Categories</h1>
 					<div className={styles.createButton}>
-						<CreateButton />
+						<CreateButtonCategories />
 					</div>
+					{/* lista */}
+					<div></div>
 				</div>
 			</div>
 		</div>
