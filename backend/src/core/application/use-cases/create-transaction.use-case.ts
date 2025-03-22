@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, BadRequestException } from '@nestjs/common';
 import { CreateTransactionDto } from '../dto/create-transaction.dto';
 import { TransactionDto } from '../dto/transaction.dto';
 import { TransactionRepository } from '../../domain/repositories/transaction.repository';

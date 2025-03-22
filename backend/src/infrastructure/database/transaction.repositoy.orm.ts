@@ -51,8 +51,8 @@ export class TransactionRepositoryOrm implements TransactionRepository {
 			SELECT  
 				COALESCE(SUM(
 					CASE  
-						WHEN t.type = 'income' AND (c.name IS NULL OR c.name <> 'investiment') THEN t.value  
-						WHEN t.type = 'expense' AND (c.name IS NULL OR c.name <> 'investiment') THEN -t.value  
+						WHEN t.type = 'income' AND c.name <> 'investiment' THEN t.value  
+						WHEN t.type = 'expense' AND c.name <> 'investiment' THEN -t.value  
 						ELSE 0  
 					END
 				), 0) AS balance,  
@@ -66,7 +66,7 @@ export class TransactionRepositoryOrm implements TransactionRepository {
 				), 0) AS invested  
 
 			FROM transactions t  
-			LEFT JOIN categories c ON t.id_category = c.id  
+			INNER JOIN categories c ON t.id_category = c.id  
 			WHERE t.id_user = $1 AND t.delete_at IS NULL;
 		`,
 			[id],
