@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Header } from '../components/Header';
 import { LeftPanel } from '../components/LeftPanel';
 import styles from './Categories.module.css';
