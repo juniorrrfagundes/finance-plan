@@ -3,6 +3,7 @@ import { Header } from '../components/Header';
 import { LeftPanel } from '../components/LeftPanel';
 import styles from './Categories.module.css';
 import { CreateButtonCategories } from '../components/Buttons/CreateButtonCategories';
+import { CategoriesList } from '../components/CategoriesList';
 
 export const Categories: React.FC = () => {
 	const token = localStorage.getItem('access_token');
@@ -11,14 +12,17 @@ export const Categories: React.FC = () => {
 		<div className={styles.categoriesContainer}>
 			<Header />
 			<div className={styles.mainContent}>
-				<LeftPanel />
+				<div className={styles.leftPanel}>
+					<LeftPanel />
+				</div>
 				<div className={styles.content}>
 					<h1>Categories</h1>
 					<div className={styles.createButton}>
 						<CreateButtonCategories />
 					</div>
-					{/* lista */}
-					<div></div>
+					<div>
+						<CategoriesList />
+					</div>
 				</div>
 			</div>
 		</div>

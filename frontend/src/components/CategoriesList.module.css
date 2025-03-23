@@ -1,0 +1,33 @@
+.customContainer {
+	max-height: 500px;
+	background-color: #30495d;
+	border-radius: 10px !important;
+}
+
+.customTable {
+	table-layout: fixed;
+}
+
+.customHeader {
+	background-color: #4a7c91 !important;
+	color: white !important;
+	font-weight: bold;
+	font-size: 1.1rem !important;
+	top: 0;
+	z-index: 1;
+}
+
+.customRow:nth-child(odd) {
+	background-color: #30495d;
+}
+
+.customRow td {
+	color: white !important;
+}
+
+.wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-height: 500px;
+}

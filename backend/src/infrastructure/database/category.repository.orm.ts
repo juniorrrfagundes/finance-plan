@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CategoryRepository } from '../../core/domain/repositories/category.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from '../../core/domain/entities/category.entity';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult, IsNull } from 'typeorm';
 import { CreateCategoryDto } from '../../core/application/dto/create-category.dto';
 import { CategoryDto } from '../../core/application/dto/category.dto';
 
@@ -31,7 +31,7 @@ export class CategoryRepositoryOrm implements CategoryRepository {
 	}
 
 	public async findByUserId(id: number): Promise<CategoryDto[] | null> {
-		const categories = await this.categoryRepository.find({ where: { id_user: id } });
+		const categories = await this.categoryRepository.find({ where: { id_user: id, delete_at: IsNull() } });
 		if (!categories.length) return null;
 		return categories.map(Category.entityToDto);
 	}

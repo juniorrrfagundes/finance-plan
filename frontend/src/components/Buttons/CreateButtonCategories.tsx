@@ -16,6 +16,7 @@ export const CreateButtonCategories: React.FC = () => {
 	};
 
 	const saveName = async () => {
+		setShowModal(false);
 		setError('');
 		setSuccess('');
 		setStatus('loading');
@@ -39,7 +40,11 @@ export const CreateButtonCategories: React.FC = () => {
 			setError('Unexpected Error');
 		}
 
-		setShowModal(false);
+		setTimeout(() => {
+			setStatus('idle');
+			setError('');
+			setSuccess('');
+		}, 6000);
 		setName('');
 	};
 

@@ -26,6 +26,10 @@
 	margin: 50px;
 }
 
+.leftPanel {
+	flex-shrink: 0;
+}
+
 @media (max-width: 768px) {
 	.dashboardContainer {
 		flex-direction: column;
