@@ -9,6 +9,8 @@ export class CreateTransactionUseCase {
 
 	public async createTransaction(createTransactionDto: CreateTransactionDto, id_user: number): Promise<TransactionDto> {
 		createTransactionDto.id_user = id_user;
+		if (!createTransactionDto.date_transaction || !createTransactionDto.description || !createTransactionDto.type || !createTransactionDto.value)
+			throw new BadRequestException('Dados inválidos');
 		return await this.transactionRepository.createTransaction(createTransactionDto);
 	}
 }
