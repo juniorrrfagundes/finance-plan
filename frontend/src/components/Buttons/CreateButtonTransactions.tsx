@@ -35,7 +35,7 @@ export const CreateButtonTransactions: React.FC<fetch> = ({ setShouldFetch }) =>
 		setError('');
 		setSuccess('');
 		setStatus('loading');
-		debugger;
+
 		try {
 			const response = await fetch('http://localhost:3000/transactions', {
 				method: 'POST',
