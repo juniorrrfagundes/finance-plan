@@ -6,6 +6,7 @@ import { CreateButtonCategories } from '../components/Buttons/CreateButtonCatego
 import { CategoriesList } from '../components/CategoriesList';
 
 export const Categories: React.FC = () => {
+	const [shouldFetch, setShouldFetch] = useState(false);
 	const token = localStorage.getItem('access_token');
 
 	return (
@@ -18,10 +19,10 @@ export const Categories: React.FC = () => {
 				<div className={styles.content}>
 					<h1>Categories</h1>
 					<div className={styles.createButton}>
-						<CreateButtonCategories />
+						<CreateButtonCategories setShouldFetch={setShouldFetch} />
 					</div>
 					<div>
-						<CategoriesList />
+						<CategoriesList setShouldFetch={setShouldFetch} shouldFetch={shouldFetch} />
 					</div>
 				</div>
 			</div>

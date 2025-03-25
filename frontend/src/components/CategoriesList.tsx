@@ -18,12 +18,16 @@ interface Category {
 	create_at: string;
 }
 
-export const CategoriesList: React.FC = () => {
+interface fetch {
+	setShouldFetch: React.Dispatch<React.SetStateAction<boolean>>;
+	shouldFetch: boolean;
+}
+
+export const CategoriesList: React.FC<fetch> = ({ setShouldFetch, shouldFetch }) => {
 	const [categories, setCategories] = useState<Category[]>([]);
 	const [editId, setEditedId] = useState<number | null>(null);
 	const [showModal, setShowModal] = useState(false);
 	const [editedName, setEditedName] = useState<string>('');
-	const [shouldFetch, setShouldFetch] = useState(false);
 	const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
 	const handleEditClick = (category: Category) => {

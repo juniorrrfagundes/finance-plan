@@ -2,7 +2,11 @@ import { useState } from 'react';
 import styles from './CreateButtonCategories.module.css';
 import { FaSpinner, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 
-export const CreateButtonCategories: React.FC = () => {
+interface fetch {
+	setShouldFetch: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const CreateButtonCategories: React.FC<fetch> = ({ setShouldFetch }) => {
 	const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 	const [showModal, setShowModal] = useState(false);
 	const [name, setName] = useState('');
@@ -27,7 +31,7 @@ export const CreateButtonCategories: React.FC = () => {
 				body: JSON.stringify({ name }),
 			});
 			const data = await response.json();
-			console.log(data);
+			setShouldFetch((prev) => !prev);
 			if (response.ok) {
 				setStatus('success');
 				setSuccess(data.message || 'Success');
