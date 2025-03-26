@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Header } from '../components/Header';
 import { LeftPanel } from '../components/LeftPanel';
-import styles from './Categories.module.css';
-import { CategoriesList } from '../components/CategoriesList';
+import styles from './transactions.module.css';
+import { TransactionsList } from '../components/TransactionsList';
 import { CreateButtonTransactions } from '../components/Buttons/CreateButtonTransactions';
 
 export const Transactions: React.FC = () => {
@@ -22,7 +22,7 @@ export const Transactions: React.FC = () => {
 						<CreateButtonTransactions setShouldFetch={setShouldFetch} />
 					</div>
 					<div>
-						<CategoriesList setShouldFetch={setShouldFetch} shouldFetch={shouldFetch} />
+						<TransactionsList />
 					</div>
 				</div>
 			</div>

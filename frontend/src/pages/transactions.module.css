@@ -1,0 +1,45 @@
+.categoriesContainer {
+	display: flex;
+	flex-direction: column;
+	height: 90vh;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.mainContent {
+	display: flex;
+	flex-grow: 1;
+	width: 150vh;
+	padding: 15px 20px;
+}
+
+.content {
+	flex-grow: 1;
+	background-color: rgb(53, 81, 92);
+	margin-top: 10px;
+	height: calc(90vh - 80px);
+	overflow-y: auto;
+	border-radius: 20px;
+	margin-left: 20px;
+}
+.createButton {
+	display: flex;
+	margin: 50px;
+}
+
+.leftPanel {
+	flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+	.dashboardContainer {
+		flex-direction: column;
+	}
+
+	.mainContent {
+		flex-direction: column;
+	}
+
+	.content {
+		height: auto;
+	}
+}
