@@ -71,6 +71,7 @@ export const CreateButtonTransactions: React.FC<fetch> = ({ setShouldFetch }) =>
 		setValue('');
 		setType('');
 		setDate('');
+		setSelectedCategoryId('');
 	};
 
 	const cancel = () => {
@@ -79,6 +80,7 @@ export const CreateButtonTransactions: React.FC<fetch> = ({ setShouldFetch }) =>
 		setValue('');
 		setType('');
 		setDate('');
+		setSelectedCategoryId('');
 	};
 
 	useEffect(() => {

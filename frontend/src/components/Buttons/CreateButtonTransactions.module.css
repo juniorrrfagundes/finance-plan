@@ -43,6 +43,7 @@
 }
 
 .modal {
+	display: grid;
 	background: rgb(53, 81, 92);
 	padding: 2%;
 	border-radius: 10px;
@@ -56,6 +57,14 @@
 }
 
 .modal input {
+	padding: 8px;
+	margin-bottom: 10px;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+.modal select {
 	padding: 8px;
 	margin-bottom: 10px;
 	border: 2px solid #ccc;
