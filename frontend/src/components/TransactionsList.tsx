@@ -32,6 +32,26 @@ export const TransactionsList: React.FC = () => {
 	const [transaction, setTransaction] = useState<Transaction[]>([]);
 	const [categories, setCategories] = useState<Category[]>([]);
 	const [formattedTransactions, setFormattedTransactions] = useState<Transaction[]>([]);
+	const [showModal, setShowModal] = useState(false);
+	const [description, setdescription] = useState('');
+	const [value, setValue] = useState('');
+	const [type, setType] = useState('');
+	const [date, setDate] = useState('');
+	const [error, setError] = useState('');
+	const [success, setSuccess] = useState('');
+	const [selectedCategoryId, setSelectedCategoryId] = useState<number | string>('');
+
+	const handleEditClick = (transaction: Transaction) => {
+		setShowModal(true);
+	};
+
+	const save = () => {
+		setShowModal(false);
+	};
+
+	const cancel = () => {
+		setShowModal(false);
+	};
 
 	useEffect(() => {
 		const fetchTransaction = async () => {
@@ -109,7 +129,7 @@ export const TransactionsList: React.FC = () => {
 									<TableCell>{transaction.type}</TableCell>
 									<TableCell>{new Date(transaction.date_transaction).toLocaleDateString('pt-BR')}</TableCell>
 									<TableCell>
-										<IconButton color="primary" onClick={() => console.log('')} aria-label="edit">
+										<IconButton color="primary" onClick={() => handleEditClick(transaction)} aria-label="edit">
 											<EditIcon />
 										</IconButton>
 										<IconButton color="secondary" onClick={() => console.log('')} aria-label="delete">
@@ -122,6 +142,34 @@ export const TransactionsList: React.FC = () => {
 					</Table>
 				</TableContainer>
 			</Paper>
+
+			{showModal && (
+				<div className={styles.modalOverlay}>
+					<div className={styles.modal}>
+						<h2>Create Transaction</h2>
+						<select value={selectedCategoryId} onChange={(e) => setSelectedCategoryId(e.target.value)}>
+							<option value="">Select Category</option>
+							{categories.map((category) => (
+								<option key={category.id} value={category.id}>
+									{category.name}
+								</option>
+							))}
+						</select>
+						<input type="text" value={description} onChange={(e) => setdescription(e.target.value)} placeholder="Enter description" />
+						<input type="text" value={value} onChange={(e) => setValue(e.target.value)} placeholder="Enter value" />
+						<select value={type} onChange={(e) => setType(e.target.value)}>
+							<option value="">Select Type</option>
+							<option value="income">Income</option>
+							<option value="expense">Expense</option>
+						</select>
+						<input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+						<div className={styles.modalButtons}>
+							<button onClick={save}>Save</button>
+							<button onClick={cancel}>Cancel</button>
+						</div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };
