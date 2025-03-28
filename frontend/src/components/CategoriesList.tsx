@@ -58,8 +58,6 @@ export const CategoriesList: React.FC<fetch> = ({ setShouldFetch, shouldFetch })
 				headers: { 'Authorization': `Bearer ${access_token}`, 'Content-Type': 'application/json' },
 				body: JSON.stringify({ 'name': editedName }),
 			});
-			console.log(editedName);
-			console.log(editId);
 			setShouldFetch((prev) => !prev);
 			setStatus('success');
 		} catch (error) {

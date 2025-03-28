@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './CategoriesList.module.css';
+import styles from './TransactionsList.module.css';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -37,18 +37,39 @@ export const TransactionsList: React.FC = () => {
 	const [value, setValue] = useState('');
 	const [type, setType] = useState('');
 	const [date, setDate] = useState('');
-	const [error, setError] = useState('');
-	const [success, setSuccess] = useState('');
+	const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 	const [selectedCategoryId, setSelectedCategoryId] = useState<number | string>('');
+	const [transactionId, setTransactionId] = useState<number | string>('');
 
 	const handleEditClick = (transaction: Transaction) => {
+		setdescription(transaction.description);
+		setValue(transaction.value.toString());
+		setType(transaction.type);
+		setDate(new Date(transaction.date_transaction).toISOString().split('T')[0]);
+		setSelectedCategoryId(transaction.id_category);
+		setTransactionId(transaction.id);
 		setShowModal(true);
 	};
 
-	const save = () => {
+	const save = async () => {
+		setStatus('idle');
+		try {
+			const access_token = localStorage.getItem('access_token');
+			const response = await fetch(`http://localhost:3000/transactions/${transactionId}`, {
+				method: 'PATCH',
+				headers: { 'Authorization': `Bearer ${access_token}`, 'Content-Type': 'application/json' },
+				body: JSON.stringify({ 'description': description, 'value': value, 'type': type, 'date_transaction': date }),
+			});
+			setStatus('success');
+		} catch (error) {
+			setStatus('error');
+			console.error('Erro ao atualizar transação:', error);
+		}
+		setTimeout(() => {
+			setStatus('idle');
+		}, 6000);
 		setShowModal(false);
 	};
-
 	const cancel = () => {
 		setShowModal(false);
 	};
@@ -146,7 +167,7 @@ export const TransactionsList: React.FC = () => {
 			{showModal && (
 				<div className={styles.modalOverlay}>
 					<div className={styles.modal}>
-						<h2>Create Transaction</h2>
+						<h2>Edit</h2>
 						<select value={selectedCategoryId} onChange={(e) => setSelectedCategoryId(e.target.value)}>
 							<option value="">Select Category</option>
 							{categories.map((category) => (
