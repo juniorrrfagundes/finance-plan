@@ -51,6 +51,24 @@ export const TransactionsList: React.FC = () => {
 		setShowModal(true);
 	};
 
+	const handleDeleteClick = async (transaction: Transaction) => {
+		setStatus('idle');
+		try {
+			const access_token = localStorage.getItem('access_token');
+			const response = await fetch(`http://localhost:3000/transactions/${transaction.id}`, {
+				method: 'DELETE',
+				headers: { 'Authorization': `Bearer ${access_token}` },
+			});
+			setStatus('success');
+		} catch (error) {
+			setStatus('error');
+			console.error('Erro ao deletar transação:', error);
+		}
+		setTimeout(() => {
+			setStatus('idle');
+		}, 6000);
+	};
+
 	const save = async () => {
 		setStatus('idle');
 		try {
@@ -70,6 +88,7 @@ export const TransactionsList: React.FC = () => {
 		}, 6000);
 		setShowModal(false);
 	};
+
 	const cancel = () => {
 		setShowModal(false);
 	};
@@ -153,7 +172,7 @@ export const TransactionsList: React.FC = () => {
 										<IconButton color="primary" onClick={() => handleEditClick(transaction)} aria-label="edit">
 											<EditIcon />
 										</IconButton>
-										<IconButton color="secondary" onClick={() => console.log('')} aria-label="delete">
+										<IconButton color="secondary" onClick={() => handleDeleteClick(transaction)} aria-label="delete">
 											<DeleteIcon />
 										</IconButton>
 									</TableCell>
