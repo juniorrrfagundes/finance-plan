@@ -14,7 +14,7 @@ export const Transactions: React.FC = () => {
 			<Header />
 			<div className={styles.mainContent}>
 				<div className={styles.leftPanel}>
-					<LeftPanel />
+					<LeftPanel setShouldFetch={setShouldFetch} shouldFetch={shouldFetch} />
 				</div>
 				<div className={styles.content}>
 					<h1>Transactions</h1>
@@ -22,7 +22,7 @@ export const Transactions: React.FC = () => {
 						<CreateButtonTransactions setShouldFetch={setShouldFetch} />
 					</div>
 					<div>
-						<TransactionsList />
+						<TransactionsList setShouldFetch={setShouldFetch} shouldFetch={shouldFetch} />
 					</div>
 				</div>
 			</div>

@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import styles from './LeftPanel.module.css';
 import { PanelButton } from './Buttons/PanelButton';
 
-export const LeftPanel: React.FC = () => {
+interface fetch {
+	setShouldFetch: React.Dispatch<React.SetStateAction<boolean>>;
+	shouldFetch: boolean;
+}
+
+export const LeftPanel: React.FC<fetch> = ({ setShouldFetch, shouldFetch }) => {
 	const [invested, setInvested] = useState<number>(0);
 	const [balance, setBalance] = useState<number>(0);
 
@@ -17,7 +22,7 @@ export const LeftPanel: React.FC = () => {
 				},
 			});
 			const data = await response.json();
-			console.log(data);
+			setShouldFetch((prev) => !prev);
 
 			setInvested(data.invested);
 			setBalance(data.balance);
@@ -28,7 +33,7 @@ export const LeftPanel: React.FC = () => {
 
 	useEffect(() => {
 		getBalanceInvestiment();
-	}, []);
+	}, [shouldFetch]);
 
 	return (
 		<div className={styles.sidebar}>

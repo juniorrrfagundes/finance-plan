@@ -14,7 +14,7 @@ export const Categories: React.FC = () => {
 			<Header />
 			<div className={styles.mainContent}>
 				<div className={styles.leftPanel}>
-					<LeftPanel />
+					<LeftPanel setShouldFetch={setShouldFetch} shouldFetch={shouldFetch} />
 				</div>
 				<div className={styles.content}>
 					<h1>Categories</h1>

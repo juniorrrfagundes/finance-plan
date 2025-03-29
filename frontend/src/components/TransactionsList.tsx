@@ -12,6 +12,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 
+interface fetch {
+	setShouldFetch: React.Dispatch<React.SetStateAction<boolean>>;
+	shouldFetch: boolean;
+}
+
 interface Transaction {
 	id: number;
 	id_category: number;
@@ -28,7 +33,7 @@ interface Category {
 	create_at: string;
 }
 
-export const TransactionsList: React.FC = () => {
+export const TransactionsList: React.FC<fetch> = ({ setShouldFetch, shouldFetch }) => {
 	const [transaction, setTransaction] = useState<Transaction[]>([]);
 	const [categories, setCategories] = useState<Category[]>([]);
 	const [formattedTransactions, setFormattedTransactions] = useState<Transaction[]>([]);
@@ -59,6 +64,7 @@ export const TransactionsList: React.FC = () => {
 				method: 'DELETE',
 				headers: { 'Authorization': `Bearer ${access_token}` },
 			});
+			setShouldFetch((prev) => !prev);
 			setStatus('success');
 		} catch (error) {
 			setStatus('error');
@@ -78,6 +84,7 @@ export const TransactionsList: React.FC = () => {
 				headers: { 'Authorization': `Bearer ${access_token}`, 'Content-Type': 'application/json' },
 				body: JSON.stringify({ 'description': description, 'value': value, 'type': type, 'date_transaction': date }),
 			});
+			setShouldFetch((prev) => !prev);
 			setStatus('success');
 		} catch (error) {
 			setStatus('error');
@@ -124,7 +131,7 @@ export const TransactionsList: React.FC = () => {
 
 		fetchCategory();
 		fetchTransaction();
-	}, []);
+	}, [shouldFetch]);
 
 	useEffect(() => {
 		const updatedTransactions = transaction.map((x) => {
